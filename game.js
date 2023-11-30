@@ -50,43 +50,14 @@ const results_section = document.querySelector("#results");
 
 
 
+let player_score = 0;
+let comp_score = 0;
+let result = "";
+const score = document.createElement("h1");
+score.textContent = "Player: 0 vs. Computer: 0";
+results_section.appendChild(score);
 
-function game() 
-{
-    //Initial definitions
-    let player_score = 0;
-    let comp_score = 0;
-    let result = "";
-    const score = document.createElement("h1");
-    score.textContent = "Player: 0 vs. Computer: 0";
-    results_section.appendChild(score);
-
-    
-    // Button Definitions
-    rock.addEventListener("click", () => {
-        result = playRound("rock", getComputerChoice());
-        const display = document.createElement("p");
-        display.textContent = result;
-        results_section.appendChild(display);
-    
-    });
-    
-    paper.addEventListener("click", () => {
-        result = playRound("paper", getComputerChoice());
-        const display = document.createElement("p");
-        display.textContent = result;
-        results_section.appendChild(display);
-    });
-    
-    scissors.addEventListener("click", () => {
-        result = playRound("scissors", getComputerChoice());
-        const display = document.createElement("p");
-        display.textContent = result;
-        results_section.appendChild(display);
-    });
-
-    // Scoring and Score Total:
-
+function scoreUpdate(result) {
     if (result[4] === "l")
         comp_score++;
     else if (result[4] === "w")
@@ -95,7 +66,47 @@ function game()
 
     // Final Results
     if (player_score === 5)
-        return("You win! The final score was " + player_score + " to " + comp_score + ".");
+    {
+        console.log("You win! The final score was " + player_score + " to " + comp_score + ".");
+    }
     else if (comp_score === 5)
-        return("You lose! The final score was " + player_score + " to " + comp_score + ".");
+    {
+
+        console.log("You lose! The final score was " + player_score + " to " + comp_score + ".");
+    }
+
+}
+
+function game() 
+{
+    //Initial definitions
+
+
+    // Button Definitions
+    rock.addEventListener("click", () => {
+        result = playRound("rock", getComputerChoice());
+        const display = document.createElement("p");
+        display.textContent = result;
+        results_section.appendChild(display);
+        scoreUpdate(result);
+    
+    });
+    
+    paper.addEventListener("click", () => {
+        result = playRound("paper", getComputerChoice());
+        const display = document.createElement("p");
+        display.textContent = result;
+        results_section.appendChild(display);
+        scoreUpdate(result);
+    });
+    
+    scissors.addEventListener("click", () => {
+        result = playRound("scissors", getComputerChoice());
+        const display = document.createElement("p");
+        display.textContent = result;
+        results_section.appendChild(display);
+        scoreUpdate(result);
+    });
+
+
 }
